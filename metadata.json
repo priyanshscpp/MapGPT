@@ -1,0 +1,6 @@
+{
+  "name": "Copy of MCP Maps Basic",
+  "description": "Query the globe and get answers instantly visualized, with Gemini grounded by MCP.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
