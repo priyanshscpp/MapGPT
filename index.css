@@ -1242,12 +1242,7 @@ canvas {
   }
 
   .chat-header-content {
-    padding-right: 48px;
     gap: 6px;
-  }
-
-  .chat-overlay.expanded .chat-header-content {
-    padding-right: 50px;
   }
 
   .chat-header-icon {
