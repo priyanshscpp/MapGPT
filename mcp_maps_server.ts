@@ -196,7 +196,9 @@ Be factual and concise. No headers or markdown.`;
       model: 'gemini-2.5-flash',
     });
 
-    const aiResponse = await chat.sendMessage(prompt);
+    const aiResponse = await chat.sendMessage({
+      text: prompt,
+    });
     const aiSummary =
       aiResponse.candidates?.[0]?.content?.parts?.[0]?.text ||
       'A notable location with interesting geographical features.';
