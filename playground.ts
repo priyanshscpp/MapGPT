@@ -249,6 +249,14 @@ export class Playground extends LitElement {
         ${this.previewFrame}
       </div>
 
+      <!-- Branding Header -->
+      <div class="mapgpt-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="mapgpt-icon">
+          <path d="M480-480Zm0 320q-122-112-181-203.5T240-552q0-109 69.5-178.5T480-800q101 0 170.5 69.5T720-552q0 71-59 162.5T480-160Zm0-216q55 0 92.5-37.5T610-506q0-55-37.5-92.5T480-636q-55 0-92.5 37.5T350-506q0 55 37.5 92.5T480-376Z"/>
+        </svg>
+        <span class="mapgpt-text">MapGPT by Priyanshu</span>
+      </div>
+
       <!-- Floating Chat Overlay at Bottom -->
       <div class="chat-overlay ${classMap({'expanded': this.chatExpanded})}">
         <!-- Chat Header/Input Bar (Always Visible) -->
@@ -305,23 +313,23 @@ export class Playground extends LitElement {
                 <path d="M120-160v-240l320-80-320-80v-240l760 320-760 320Z" />
               </svg>
             </button>
+            ${this.chatExpanded ? html`
+              <button class="chat-close-btn" @click=${(e: Event) => {
+                e.stopPropagation();
+                this.toggleChat();
+              }} title="Close chat">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                </svg>
+              </button>
+            ` : html``}
           </div>
           ${this.chatState !== ChatState.IDLE ? html`
             <div class="chat-status-indicator">
               ${this.chatState === ChatState.GENERATING ? html`${ICON_BUSY} Generating...` : html``}
               ${this.chatState === ChatState.THINKING ? html`${ICON_BUSY} Thinking...` : html``}
-              ${this.chatState === ChatState.EXECUTING ? html`${ICON_BUSY} Locating...` : html``}
+              ${this.chatState === ChatState.EXECUTING ? html`${ICON_BUSY} Locating...` : html ``}
             </div>
-          ` : html``}
-          ${this.chatExpanded ? html`
-            <button class="chat-close-btn" @click=${(e: Event) => {
-              e.stopPropagation();
-              this.toggleChat();
-            }}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
-                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
-              </svg>
-            </button>
           ` : html``}
         </div>
 
