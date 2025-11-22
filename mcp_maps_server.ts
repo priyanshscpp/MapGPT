@@ -97,7 +97,7 @@ async function getWeatherForLocation(lat: number, lng: number): Promise<WeatherD
 
     return {
       temperatureC: data.current.temperature_2m,
-      feelsLikeC: data.current.feels_like,
+      feelsLikeC: data.current.apparent_temperature,
       condition,
       humidity: data.current.relative_humidity_2m,
       windKph: data.current.wind_speed_10m,
