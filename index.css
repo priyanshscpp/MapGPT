@@ -1068,11 +1068,6 @@ canvas {
 
   .chat-header-content {
     gap: 8px;
-    padding-right: 50px;
-  }
-
-  .chat-overlay.expanded .chat-header-content {
-    padding-right: 52px;
   }
 
   .chat-header-icon {
