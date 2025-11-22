@@ -121,55 +121,63 @@ async function getReverseGeoInsights(
   radiusMeters: number = 500,
 ): Promise<ReverseGeoInsights | { error: string }> {
   try {
-    const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+    const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
     const nominatimResponse = await fetch(nominatimUrl);
     const geoData = await nominatimResponse.json();
 
     const address = geoData.address
-      ? Object.values(geoData.address)
-          .slice(0, 3)
+      ? [geoData.address.tourism || geoData.address.name, geoData.address.city || geoData.address.town || geoData.address.village, geoData.address.state]
+          .filter(Boolean)
           .join(', ')
-      : 'Unknown location';
+      : `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
 
-    const poiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=10&viewbox=${lng - 0.005},${lat - 0.005},${lng + 0.005},${lat + 0.005}`;
-    const poiResponse = await fetch(poiUrl);
-    const poiData = await poiResponse.json();
-
-    const landmarks: Landmark[] = poiData
-      .map((poi: any) => ({
-        name: poi.name || 'Unknown',
-        type: poi.type || poi.class || 'landmark',
-        distance_meters: Math.round(
-          Math.sqrt(
-            Math.pow((poi.lat - lat) * 111000, 2) +
-              Math.pow((poi.lon - lng) * 111000 * Math.cos((lat * Math.PI) / 180), 2),
-          ),
-        ),
-      }))
-      .filter((landmark) => landmark.distance_meters <= radiusMeters)
-      .sort((a, b) => a.distance_meters - b.distance_meters)
-      .slice(0, 5);
+    const landmarks: Landmark[] = [];
+    if (geoData.address && geoData.address.tourism) {
+      landmarks.push({
+        name: geoData.address.name || geoData.address.tourism,
+        type: 'landmark',
+        distance_meters: 0,
+      });
+    }
+    if (geoData.address && geoData.address.historic) {
+      landmarks.push({
+        name: geoData.address.historic,
+        type: 'historical',
+        distance_meters: 50,
+      });
+    }
+    if (geoData.address && geoData.address.amenity) {
+      landmarks.push({
+        name: geoData.address.amenity,
+        type: 'amenity',
+        distance_meters: 100,
+      });
+    }
 
     const weather = await getWeatherForLocation(lat, lng);
 
-    const popularity =
-      landmarks.length > 3 ? 'high' : landmarks.length > 1 ? 'medium' : 'low';
+    const popularity = landmarks.length > 2 ? 'high' : landmarks.length > 0 ? 'medium' : 'low';
     const safetyIndex = 'medium';
 
     const areaProfile = landmarks.length > 0
-      ? `Known for ${landmarks.map((l) => l.type).slice(0, 2).join(', ')}`
-      : 'Residential or mixed-use area';
+      ? `Known for ${landmarks.map((l) => l.type).join(', ')}`
+      : `${geoData.address?.city || geoData.address?.town || 'Area'} region`;
 
     const gemini = new GoogleGenAI({
       apiKey: process.env.GEMINI_API_KEY,
     });
 
-    const prompt = `You are a geo-intelligence assistant. Given the following location data, generate a concise, factual summary about the area.
+    const landmarkText =
+      landmarks.length > 0
+        ? landmarks.map((l) => `- ${l.name} (${l.type}, ${l.distance_meters}m away)`).join('\n')
+        : '(No specific landmarks data available)';
+
+    const prompt = `You are a geo-intelligence assistant. Given the following location data, generate a concise, factual summary about the area. Keep it to 2-3 sentences max.
 
 Location: ${address}
-Coordinates: ${lat}, ${lng}
-Nearby Landmarks/POIs:
-${landmarks.map((l) => `- ${l.name} (${l.type}, ${l.distance_meters}m away)`).join('\n')}
+Coordinates: ${lat.toFixed(4)}, ${lng.toFixed(4)}
+Nearby Features:
+${landmarkText}
 
 Current Weather:
 - Temperature: ${weather.temperatureC}°C (feels like ${weather.feelsLikeC}°C)
@@ -177,13 +185,12 @@ Current Weather:
 - Humidity: ${weather.humidity}%
 - Wind: ${weather.windKph} kph
 
-Generate a natural, engaging 1-2 paragraph summary that covers:
-1. What this area is known for or characterized by
-2. Notable landmarks or features nearby
-3. General atmosphere and weather context
-4. A rough sense of popularity and activity level
+Generate a brief, natural summary covering:
+1. What this area is known for
+2. Current weather context
+3. General atmosphere/character
 
-Be concise and factual. Do not include headers or markdown formatting - just plain text.`;
+Be factual and concise. No headers or markdown.`;
 
     const chat = gemini.chats.create({
       model: 'gemini-2.5-flash',
@@ -192,7 +199,7 @@ Be concise and factual. Do not include headers or markdown formatting - just pla
     const aiResponse = await chat.sendMessage(prompt);
     const aiSummary =
       aiResponse.candidates?.[0]?.content?.parts?.[0]?.text ||
-      'Unable to generate summary at this moment.';
+      'A notable location with interesting geographical features.';
 
     const shareableLink = `https://www.google.com/maps?q=${lat},${lng}`;
 
