@@ -761,6 +761,7 @@ canvas {
 
 .chat-header-send {
   width: 48px;
+  min-width: 48px;
   height: 48px;
   border-radius: 50%;
   background: var(--color-accent);
@@ -773,6 +774,7 @@ canvas {
   flex-shrink: 0;
   transition: all 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0;
 }
 
 .chat-header-send:hover:not(.disabled) {
