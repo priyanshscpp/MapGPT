@@ -59,7 +59,7 @@ interface ShareableLocation {
 async function getWeatherForLocation(lat: number, lng: number): Promise<WeatherData> {
   try {
     const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,feels_like,weather_code,relative_humidity_2m,wind_speed_10m&timezone=auto`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m&timezone=auto`,
     );
     const data = await response.json();
 
