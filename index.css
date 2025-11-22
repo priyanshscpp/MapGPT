@@ -853,10 +853,6 @@ canvas {
 }
 
 .chat-close-btn {
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
   width: 36px;
   height: 36px;
   min-width: 36px;
@@ -869,18 +865,19 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
   flex-shrink: 0;
+  margin-left: 8px;
 }
 
 .chat-close-btn:hover {
   background: var(--color-bg3);
-  transform: translateY(-50%) rotate(90deg);
+  transform: rotate(90deg) scale(1.1);
 }
 
 .chat-close-btn:active {
-  transform: translateY(-50%) scale(0.9);
+  transform: rotate(90deg) scale(0.95);
 }
 
 .chat-close-btn svg {
