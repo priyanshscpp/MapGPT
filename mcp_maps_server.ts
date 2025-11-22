@@ -255,6 +255,28 @@ async function generateShareableLocation(
   }
 }
 
+async function getCoordinatesForLocation(locationName: string): Promise<{ latitude: number; longitude: number; address: string } | { error: string }> {
+  try {
+    const encodedLocation = encodeURIComponent(locationName);
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodedLocation}&limit=1`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!data || data.length === 0) {
+      return { error: `Could not find coordinates for "${locationName}"` };
+    }
+
+    return {
+      latitude: parseFloat(data[0].lat),
+      longitude: parseFloat(data[0].lon),
+      address: data[0].display_name,
+    };
+  } catch (error) {
+    console.error('Geocoding error:', error);
+    return { error: `Failed to geocode "${locationName}": ${(error as Error).message}` };
+  }
+}
+
 export async function startMcpGoogleMapServer(
   transport: Transport,
   mapQueryHandler: (params: MapParams) => void,
@@ -264,6 +286,19 @@ export async function startMcpGoogleMapServer(
     name: 'AI Studio Google Map',
     version: '1.0.0',
   });
+
+  server.tool(
+    'geocode_location',
+    'Convert a place name or address to latitude and longitude coordinates',
+    {location: z.string()},
+    async ({location}) => {
+      const result = await getCoordinatesForLocation(location);
+      const jsonText = JSON.stringify(result, null, 2);
+      return {
+        content: [{type: 'text', text: jsonText}],
+      };
+    },
+  );
 
   server.tool(
     'view_location_google_maps',
