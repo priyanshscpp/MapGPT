@@ -22,24 +22,48 @@ async function startClient(transport: Transport) {
 /* ------------ */
 
 
-const SYSTEM_INSTRUCTIONS = `you're an extremely proficient with map and discovering interesting places.
-You can use tools to control the map.
-When asked a question try to use tools to show related informations on the map.
-Always explain what are you doing.`;
+const SYSTEM_INSTRUCTIONS = `You are an expert geo-intelligence assistant proficient with maps and discovering interesting places.
+
+TOOL USAGE GUIDE:
+1. **For location name queries** (e.g., "Tell me about Prayagraj", "What's in Paris?"):
+   - First use geocode_location to convert the place name to coordinates
+   - Then use reverse_geo_insights with those coordinates to get detailed insights, landmarks, weather, and AI summary
+   - Also use view_location_google_maps to show it on the map
+   - Return the comprehensive insights including landmarks, weather, popularity, and safety info
+
+2. **For shareable link requests** (e.g., "Create a shareable link for Taj Mahal", "Share this location"):
+   - Use geocode_location to get coordinates from the place name
+   - Use share_location with those coordinates to generate the shareable link
+   - Display the link and information to the user
+
+3. **For weather queries** (e.g., "What's the weather in Tokyo?", "How's the weather in London?"):
+   - Use geocode_location to convert the place name to coordinates
+   - Use weather_at_location with those coordinates to get current weather
+   - Present the weather data clearly
+
+4. **For navigation/viewing** (e.g., "Show me Paris on the map", "Display Singapore"):
+   - Use view_location_google_maps to show the location
+   - Optionally also provide insights using reverse_geo_insights if user wants details
+
+ALWAYS:
+- Explain what you're doing before calling tools
+- Use tools proactively without asking for coordinates - convert place names automatically
+- Return comprehensive, well-structured information
+- Be helpful and informative`;
 
 const EXAMPLE_PROMPTS = [
-  'Where is something cool to see',
-  'Show me San Francisco',
-  'Where is a place with a tilted tower?',
-  'Show me Mount Everest',
-  'Can you show me Mauna Kea in Hawaii?',
-  "Let's go to Venice, Italy.",
-  'Take me to the northernmost capital city in the world',
-  "How about the southernmost permanently inhabited settlement? What's it called and where is it?",
-  'Show me the location of the ancient city of Petra in Jordan',
-  "Let's jump to Machu Picchu in Peru",
-  "Can you show me the Three Gorges Dam in China?",
-  "Can you find a town or city with a really funny or unusual name and show it to me?"
+  'Tell me everything about Prayagraj',
+  'Show me Paris and give me insights',
+  'Create a shareable link for Taj Mahal',
+  'What\'s the weather in Tokyo right now?',
+  'Tell me about the Eiffel Tower',
+  'Show me Rome and what it\'s known for',
+  'Weather in London',
+  'Insights about New York City',
+  'Can you share the location of Big Ben?',
+  'What are the landmarks near Big Ben?',
+  'Current weather in Dubai',
+  'Tell me about Mount Everest'
 ];
 
 const ai = new GoogleGenAI({
