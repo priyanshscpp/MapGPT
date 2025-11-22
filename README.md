@@ -20,6 +20,12 @@ This project transforms raw map coordinates into rich, human-level insights incl
 - 🐳 Docker container support
 - 🔄 Built with Vite for fast development and optimized production builds
 
+## 🛠️ Screenshots
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
 ## 💬 Example Prompts
 
 ### 1. Natural Language Geo-Search
@@ -42,13 +48,10 @@ Generate shareable map links and descriptions.
 - Generate a shareable location link for coordinates 28.7041, 77.1025.
 - Share this location with a label and one-line description:
   lat: 51.5074, lng: -0.1278
-- Give me reverse geo insights for 37.7749, -122.4194 including a shareable link.
 
 ### 4. Weather at Location
 Ask for real-time weather, summarized conditions, or weather-based reasoning.
 - Get the current weather for latitude 28.5355 and longitude 77.3910.
-- Give me reverse geo insights and include the weather for 34.0522, -118.2437.
-- What is the weather like near 48.8566, 2.3522 and how does it affect the area?
 
 ### 5. Combined Full-Feature Prompts
 These showcase the complete intelligence pipeline.
@@ -65,17 +68,7 @@ These showcase the complete intelligence pipeline.
 
 - Compare the area around 12.9716, 77.5946 with 28.7041, 77.1025 in terms of landmarks, popularity, weather, and what each region is known for.
 
-### 6. POI Discovery & Rankings
-Ask for top places, categories, hidden gems, or tourist hotspots.
-- List the top 5 tourist attractions within 3 km of 51.5072, -0.1276 and explain why they are popular.
-- Find the best breakfast cafés near 37.7749, -122.4194 with high ratings and quiet ambiance.
-- Show me underrated or less crowded but interesting places to visit near 28.7041, 77.1025.
 
-### 7. Area Insights + Weather + Share Link
-Instant neighborhood snapshots.
-- Give me a snapshot of 55.7558, 37.6173 including the weather, nearby landmarks, popularity, and a shareable link.
-- If I'm visiting 35.6895, 139.6917 today, what should I expect in terms of weather, crowd, safety, and places to explore?
-- Explain the vibe of the neighborhood around 43.651070, -79.347015 and how the current weather affects it.
 
 
 ## 🛠️ Prerequisites
@@ -85,10 +78,7 @@ Instant neighborhood snapshots.
 - Docker 20.10+ (optional)
 - Google Maps API key
 
-## 🛠️ Screenshots
 
-![alt text](image.png)
-![alt text](image-1.png)
 
 
 ## 🚀 Quick Start
