@@ -1,18 +1,151 @@
+# MCP Maps Server
 
+A high-performance mapping application built with modern web technologies, providing real-time geospatial visualization and interaction capabilities.
 
-# Run and deploy this AI Application app
+## 🚀 Features
 
-This contains everything you need to run your app locally.
+- 🗺️ Interactive map visualization
+- ⚡ Real-time data updates
+- 📱 Responsive design for all devices
+- 🔒 Secure and scalable architecture
+- 🐳 Docker container support
+- 🔄 Built with Vite for fast development and optimized production builds
 
+## 🛠️ Prerequisites
 
-## Run Locally
+- Node.js 18+
+- npm 9+ or yarn 1.22+
+- Docker 20.10+ (optional)
+- Google Maps API key
 
-**Prerequisites:**  Node.js
+## 🚀 Quick Start
 
+### Local Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-# MapGPT
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/mcp-maps-server.git
+   cd mcp-maps-server
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env.local` file with your configuration:
+   ```env
+   VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+### Docker Setup
+
+1. Build the Docker image:
+   ```bash
+   docker build -t mcp-maps-server .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 3000:3000 --env-file .env.local mcp-maps-server
+   ```
+   The application will be available at [http://localhost:3000](http://localhost:3000)
+
+## 📂 Project Structure
+
+```
+mcp-maps-server/
+├── src/                    # Source files
+│   ├── components/         # Reusable UI components
+│   ├── services/           # API and service integrations
+│   ├── types/              # TypeScript type definitions
+│   └── utils/              # Utility functions
+├── public/                 # Static assets
+├── .env.local              # Environment variables (not versioned)
+├── index.html              # Main HTML file
+├── vite.config.ts          # Vite configuration
+└── tsconfig.json           # TypeScript configuration
+```
+
+## 🧪 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run linter
+- `npm run type-check` - Run TypeScript type checking
+
+## 🔧 Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_GOOGLE_MAPS_API_KEY` | Google Maps JavaScript API key | Yes |
+| `VITE_API_BASE_URL` | Base URL for API requests | No |
+
+## 🐳 Docker Deployment
+
+### Production Build
+
+```bash
+docker build -t mcp-maps-server:latest .
+```
+
+### Run with Environment Variables
+
+```bash
+docker run -d \
+  --name mcp-maps-server \
+  -p 3000:3000 \
+  --env-file .env.production \
+  mcp-maps-server:latest
+```
+
+### Docker Compose
+
+Create a `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+
+services:
+  mcp-maps:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.production
+    restart: unless-stopped
+```
+
+Then run:
+```bash
+docker-compose up -d
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📬 Contact
+
+For questions or feedback, please open an issue or contact the maintainers.
+
+---
+
+<div align="center">
+  Made with ❤️ by Your Team Name
+</div>
