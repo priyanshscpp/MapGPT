@@ -819,10 +819,13 @@ canvas {
 
 .chat-close-btn {
   position: absolute;
-  top: 12px;
+  top: 50%;
   right: 16px;
+  transform: translateY(-50%);
   width: 36px;
   height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   border-radius: 50%;
   background: var(--color-bg2);
   color: var(--color-text2);
@@ -832,11 +835,17 @@ canvas {
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .chat-close-btn:hover {
   background: var(--color-bg3);
-  transform: rotate(90deg);
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.chat-close-btn:active {
+  transform: translateY(-50%) scale(0.9);
 }
 
 .chat-close-btn svg {
