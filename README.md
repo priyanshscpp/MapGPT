@@ -1,11 +1,11 @@
-# MCP Maps Server
+# MapGPT MCP 
 
 A high-performance mapping application built with modern web technologies, providing real-time geospatial visualization and interaction capabilities.
 
 ## 🚀 Features
 
-- 🗺️ Interactive map visualization
-- ⚡ Real-time data updates
+- 🗺️ Live Location Sharing with real-time updates.
+- ⚡ Real-time chatting with Maps
 - 📱 Responsive design for all devices
 - 🔒 Secure and scalable architecture
 - 🐳 Docker container support
@@ -17,6 +17,13 @@ A high-performance mapping application built with modern web technologies, provi
 - npm 9+ or yarn 1.22+
 - Docker 20.10+ (optional)
 - Google Maps API key
+- Gemini API Key
+
+## 🛠️ Screenshots
+
+![MapGPT Dashboard](docs/screenshot1.png)
+![Real-time Location Sharing](docs/screenshot2.png)
+
 
 ## 🚀 Quick Start
 
@@ -24,8 +31,8 @@ A high-performance mapping application built with modern web technologies, provi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mcp-maps-server.git
-   cd mcp-maps-server
+   git clone https://github.com/yourusername/mapgpt.git
+   cd mapgpt
    ```
 
 2. Install dependencies:
@@ -48,19 +55,19 @@ A high-performance mapping application built with modern web technologies, provi
 
 1. Build the Docker image:
    ```bash
-   docker build -t mcp-maps-server .
+   docker build -t MapGPT .
    ```
 
 2. Run the container:
    ```bash
-   docker run -p 3000:3000 --env-file .env.local mcp-maps-server
+   docker run -p 3000:3000 --env-file .env.local MapGPT
    ```
    The application will be available at [http://localhost:3000](http://localhost:3000)
 
 ## 📂 Project Structure
 
 ```
-mcp-maps-server/
+mapgpt/
 ├── src/                    # Source files
 │   ├── components/         # Reusable UI components
 │   ├── services/           # API and service integrations
@@ -93,17 +100,17 @@ mcp-maps-server/
 ### Production Build
 
 ```bash
-docker build -t mcp-maps-server:latest .
+docker build -t mapgpt:latest .
 ```
 
 ### Run with Environment Variables
 
 ```bash
 docker run -d \
-  --name mcp-maps-server \
+  --name mapgpt \
   -p 3000:3000 \
   --env-file .env.production \
-  mcp-maps-server:latest
+  mapgpt:latest
 ```
 
 ### Docker Compose
