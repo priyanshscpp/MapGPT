@@ -724,11 +724,6 @@ canvas {
   z-index: 1001;
   width: 100%;
   box-sizing: border-box;
-  padding-right: 48px;
-}
-
-.chat-overlay.expanded .chat-header-content {
-  padding-right: 50px;
 }
 
 .chat-header-icon {
