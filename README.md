@@ -1,6 +1,15 @@
 # MapGPT MCP 
 
 A high-performance mapping application built with modern web technologies, providing real-time geospatial visualization and interaction capabilities.
+This project transforms raw map coordinates into rich, human-level insights including:  
+- nearby landmarks  
+- popularity  
+- safety  
+- weather  
+- area profile  
+- shareable location links  
+- natural language geo-search  
+- intelligent reasoning and recommendations  
 
 ## 🚀 Features
 
@@ -11,18 +20,75 @@ A high-performance mapping application built with modern web technologies, provi
 - 🐳 Docker container support
 - 🔄 Built with Vite for fast development and optimized production builds
 
+## 💬 Example Prompts
+
+### 1. Natural Language Geo-Search
+Ask for places, categories, rankings, or filters.
+- Locate me Prayagraj in Map.
+- Find the top restaurants within 2km of Connaught Place, New Delhi.
+- Show me all hospitals within 5km of IIT Delhi that are open right now.
+- Find cafés near HSR Layout with ratings above 4.2 and outdoor seating.
+
+### 2. Reverse Geocoding with AI Summary
+Get full location insights: address, POIs, popularity, safety, and area profile.
+- Give me reverse geo insights for latitude 28.6139 and longitude 77.2090.
+- What important landmarks and points of interest are near 12.9716, 77.5946? Also summarize the area.
+- Tell me how popular this area is and how safe it usually is:
+  lat: 19.0760, lng: 72.8777
+- Generate a short profile of the neighborhood around 40.7128, -74.0060 with landmarks, popularity and what it's known for.
+
+### 3. Location Sharing Utilities
+Generate shareable map links and descriptions.
+- Generate a shareable location link for coordinates 28.7041, 77.1025.
+- Share this location with a label and one-line description:
+  lat: 51.5074, lng: -0.1278
+- Give me reverse geo insights for 37.7749, -122.4194 including a shareable link.
+
+### 4. Weather at Location
+Ask for real-time weather, summarized conditions, or weather-based reasoning.
+- Get the current weather for latitude 28.5355 and longitude 77.3910.
+- Give me reverse geo insights and include the weather for 34.0522, -118.2437.
+- What is the weather like near 48.8566, 2.3522 and how does it affect the area?
+
+### 5. Combined Full-Feature Prompts
+These showcase the complete intelligence pipeline.
+- Analyze the location 40.748817, -73.985428 by giving me:
+  • Full reverse geocoding
+  • Nearby landmarks
+  • Popularity
+  • Safety index
+  • What the area is known for
+  • Weather
+  • A shareable maps link
+
+- Create a complete geo-intelligence report for coordinates 25.276987, 55.296249 with POIs, AI summary, shareable link, and current weather.
+
+- Compare the area around 12.9716, 77.5946 with 28.7041, 77.1025 in terms of landmarks, popularity, weather, and what each region is known for.
+
+### 6. POI Discovery & Rankings
+Ask for top places, categories, hidden gems, or tourist hotspots.
+- List the top 5 tourist attractions within 3 km of 51.5072, -0.1276 and explain why they are popular.
+- Find the best breakfast cafés near 37.7749, -122.4194 with high ratings and quiet ambiance.
+- Show me underrated or less crowded but interesting places to visit near 28.7041, 77.1025.
+
+### 7. Area Insights + Weather + Share Link
+Instant neighborhood snapshots.
+- Give me a snapshot of 55.7558, 37.6173 including the weather, nearby landmarks, popularity, and a shareable link.
+- If I'm visiting 35.6895, 139.6917 today, what should I expect in terms of weather, crowd, safety, and places to explore?
+- Explain the vibe of the neighborhood around 43.651070, -79.347015 and how the current weather affects it.
+
+
 ## 🛠️ Prerequisites
 
 - Node.js 18+
 - npm 9+ or yarn 1.22+
 - Docker 20.10+ (optional)
 - Google Maps API key
-- Gemini API Key
 
 ## 🛠️ Screenshots
 
-![MapGPT Dashboard](docs/screenshot1.png)
-![Real-time Location Sharing](docs/screenshot2.png)
+![alt text](image.png)
+![alt text](image-1.png)
 
 
 ## 🚀 Quick Start
@@ -154,5 +220,5 @@ For questions or feedback, please open an issue or contact the maintainers.
 ---
 
 <div align="center">
-  Made with ❤️ by Your Team Name
+  Made with ❤️ by Priyanshu Yadav 
 </div>
