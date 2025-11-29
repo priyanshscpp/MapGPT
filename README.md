@@ -9,7 +9,9 @@ This project transforms raw map coordinates into rich, human-level insights incl
 - area profile  
 - shareable location links  
 - natural language geo-search  
-- intelligent reasoning and recommendations  
+- intelligent reasoning and recommendations
+<img width="1353" height="754" alt="image" src="https://github.com/user-attachments/assets/85e0690e-1abe-4a52-9a7e-f4aef573e2bb" />
+
 
 ## 🚀 Features
 
